@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoHaven - Animated Background & Dynamic Form</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .slideshow {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeInOut 20s infinite;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            40% {
+                opacity: 1;
+            }
+            60% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .form-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 300px;
+        }
+        .header-text {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .format-text {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 90%;
+            padding: 8px;
+            margin: 5px auto;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .success {
+            background-color: #28a745;
+            color: white;
+        }
+        .error {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="slideshow">
+        <div class="slide" style="background-image: url('https://imgix.doingmoretoday.com/app/uploads/2023/06/26083807/GoodPets_Spring_2023_Article4.jpg?auto=format&amp;ixlib=imgixjs-3.6.1');"></div>
+        <div class="slide" style="background-image: url('https://robbreport.com/wp-content/uploads/2019/05/divo04.jpg?w=1000');"></div>
+        <div class="slide active" style="background-image: url('https://ecohavenstore.com/cdn/shop/files/Instagram_Profile_Picture.jpg?v=1673808547');"></div>
+        <div class="slide" style="background-image: url('https://media.vogue.co.uk/photos/6079a352e05667bf394abfe8/16:9/w_320%2Cc_limit/IMGN_ST201104_BRITISH_VOGUE_20.11.15_SHOT_C_037_F12.jpg');"></div>
+        <div class="slide" style="background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...');"></div>
+    </div>
+
+    <div class="form-container">
+        <div class="header-text" id="headerText"></div>
+        <form id="registrationForm">
+            <div class="format-text">Full Name (e.g., John S)</div>
+            <input type="text" id="fullName" placeholder="Full Name" required="">
+            
+            <div class="format-text">Registration Number (e.g., BCS-01-1234-5678)</div>
+            <input type="text" id="regNumber" placeholder="Registration Number" pattern="BCS-\d{2}-\d{4}-\d{4}" required="">
+            
+            <div class="format-text">Email (e.g., example@gmail.com)</div>
+            <input type="email" id="email" placeholder="Email" required="">
+            
+            <select id="sex">
+                <option value="" selected="selected">Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            
+            <select id="region">
+                <option value="" selected="selected">Select Region</option>
+                <!-- Regions will be loaded dynamically -->
+            </select>
+            
+            <select id="district">
+                <option value="" selected="selected">Select District</option>
+            </select>
+            
+            <input type="password" id="password" placeholder="Password" required="">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required="">
+            
+            <button type="submit">Register</button>
+        </form>
+        
+        <div class="alert success" id="successAlert">Login Successful!</div>
+        <div class="alert error" id="errorAlert">Invalid Login!</div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Typing and Deleting Effect
+            const phrases = [
+                "Welcome to EcoHaven",
+                "Your Bright Future is Here",
+                "Win With Us Or Watch Us Win",
+                "Sustainability Starts With You",
+                "EcoHaven - A Greener Tomorrow"
+            ];
+            let currentPhrase = 0;
+            let currentIndex = 0;
+            let isDeleting = false;
+            let textInterval;
+
+            function typeEffect() {
+                let text = phrases[currentPhrase].substring(0, currentIndex);
+                $('#headerText').text(text);
+
+                if (isDeleting) {
+                    currentIndex--;
+                    if (currentIndex <= 0) {
+                        isDeleting = false;
+                        currentPhrase = (currentPhrase + 1) % phrases.length;
+                    }
+                } else {
+                    currentIndex++;
+                    if (currentIndex === phrases[currentPhrase].length) {
+                        isDeleting = true;
+                    }
+                }
+            }
+
+            textInterval = setInterval(typeEffect, 150);
+
+            // Regions and Districts Dynamic Loading
+            let regions = {
+                "Arusha": ["Arusha City", "Meru", "Karatu"],
+                "Dar es Salaam": ["Ilala", "Kinondoni", "Temeke"],
+                "Dodoma": ["Bahi", "Chamwino", "Kondoa"],
+                "Geita": ["Bukombe", "Chato", "Geita"],
+                "Iringa": ["Iringa Municipal", "Kilolo", "Mufindi"],
+                "Kagera": ["Biharamulo", "Bukoba", "Karagwe"],
+                "Katavi": ["Mlele", "Mpanda"],
+                "Kigoma": ["Buhigwe", "Kakonko", "Kasulu"],
+                "Kilimanjaro": ["Hai", "Moshi", "Rombo"],
+                "Lindi": ["Kilwa", "Lindi Rural", "Lindi Urban"],
+                "Manyara": ["Babati", "Hanang", "Kiteto"],
+                "Mara": ["Bunda", "Butiama", "Musoma"],
+                "Mbeya": ["Chunya", "Kyela", "Mbeya City"],
+                "Morogoro": ["Gairo", "Kilombero", "Kilosa"],
+                "Mtwara": ["Masasi", "Mtwara Municipal", "Newala"],
+                "Mwanza": ["Ilemela", "Kwimba", "Magu"],
+                "Njombe": ["Ludewa", "Makambako Town", "Njombe Town"],
+                "Pemba North": ["Micheweni", "Wete"],
+                "Pemba South": ["Chake Chake", "Mkoani"],
+                "Pwani": ["Bagamoyo", "Kibaha", "Kisarawe"],
+                "Rukwa": ["Kalambo", "Nkasi", "Sumbawanga"],
+                "Ruvuma": ["Mbinga", "Namtumbo", "Songea"],
+                "Shinyanga": ["Kahama", "Kishapu", "Shinyanga Town"],
+                "Simiyu": ["Bariadi", "Busega", "Itilima"],
+                "Singida": ["Iramba", "Manyoni", "Singida Municipal"],
+                "Songwe": ["Ileje", "Mbozi", "Tunduma"],
+                "Tabora": ["Igunga", "Nzega", "Tabora Municipal"],
+                "Tanga": ["Handeni", "Korogwe", "Muheza"],
+                "Unguja North": ["Kaskazini A", "Kaskazini B"],
+                "Unguja South": ["Kusini", "Kati"],
+                "Zanzibar Urban/West": ["Magharibi"]
+            };
+
+            // Dynamically populate the regions dropdown
+            $.each(regions, function(region) {
+                $('#region').append(`<option value="${region}">${region}</option>`);
+            });
+
+            // Update districts based on selected region
+            $('#region').change(function() {
+                let selectedRegion = $(this).val();
+                let districts = regions[selectedRegion] || [];
+                $('#district').empty().append('<option value="">Select District</option>');
+                $.each(districts, function(index, district) {
+                    $('#district').append(`<option value="${district}">${district}</option>`);
+                });
+            });
+
+            $('#registrationForm').submit(function(e) {
+    e.preventDefault();
+    let password = $('#password').val();
+    let confirmPassword = $('#confirmPassword').val();
+
+    if (password !== confirmPassword) {
+        $('#errorAlert').show();
+        $('#successAlert').hide();
+        return;
+    }
+
+    // Success alert
+    $('#successAlert').show();
+    $('#errorAlert').hide();
+
+    // Redirect to shoplayout.html after a short delay
+    setTimeout(function() {
+        window.location.href = "index.html";
+    }, 2000); // 2-second delay for user to see the success message
+});
+
+            });
+        
+    </script>
+</body>
+</html>

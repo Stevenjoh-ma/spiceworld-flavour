@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiceWorld</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5dc;
+            color: #4b3621;
+        }
+
+        header {
+            background-color: #4b3621;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #a67c52;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            border-radius: 0;
+            border: 1px solid #a67c52;
+            width: 250px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #6b4f29;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffe4b5;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px;
+            background-color: #fff8dc;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            color: #4b3621;
+        }
+
+        .hero h2 {
+            font-size: 1.8em;
+            color: #6b4f29;
+            margin-top: 20px;
+        }
+
+        .hero button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 0;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #6b4f29;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .image-row img {
+            width: 30%;
+            height: auto;
+            border-radius: 0;
+        }
+
+        .image-row img:nth-child(2) {
+            align-self: center;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 0;
+            border: 1px solid #a67c52;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #4b3621;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+            border-top: 2px solid #a67c52;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .faq, .testimonials {
+            background-color: #fff8dc;
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #a67c52;
+            border-radius: 0;
+        }
+
+        .faq h2, .testimonials h2 {
+            text-align: center;
+            color: #6b4f29;
+        }
+
+        .list-section {
+            padding: 20px;
+        }
+
+        .list-section ul, .list-section ol {
+            margin: 20px;
+        }
+
+        .list-section dl {
+            margin: 20px;
+        }
+
+        .unformatted {
+            font-family: monospace;
+            white-space: pre;
+            background-color: #e0d5c1;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <p>SpiceWorld</p>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search for spices...">
+        <button>Search</button>
+    </div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#special-offers">Special Offers</a>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <h1>Welcome to SpiceWorld</h1>
+    <h2>Discover a world of flavors!</h2>
+</section>
+
+<div class="image-row">
+  <img src="images/spice1.jpg" alt="Spice 1" style="float: left;" onerror="this.src='https://www.tastingtable.com/img/gallery/tips-you-need-when-cooking-with-spices/l-intro-1670951341.jpg'">
+  <img src="images/spice2.jpg" alt="Spice 2" style="margin: auto;" onerror="this.src='https://i.pinimg.com/originals/fa/c2/22/fac222bfb36893ae949cb9ec16cea588.jpg'">
+  <img src="images/spice3.jpg" alt="Spice 3" style="float: right;" onerror="this.src='https://www.upwellness.com/wp-content/uploads/2016/08/Fotolia_87176242_Subscription_Monthly_M.jpg'">
+</div>
+
+<div class="image-row">
+  <a href="featured-spice.html">
+    <img src="images/spice4.jpg" alt="Spice of the Month" onerror="this.src='https://wallpapercave.com/wp/wp2023983.jpg'">
+  </a>
+</div>
+
+<section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>What is SpiceWorld?</h3>
+    <p>Your go-to destination for all things spices.</p>
+    <h3>How do I place an order?</h3>
+    <p>Browse, add to cart, and checkout with ease!</p>
+</section>
+
+<section class="testimonials">
+    <h2>Customer Testimonials</h2>
+    <blockquote>"Best spices ever! My dishes have never tasted better."</blockquote>
+    <cite>- Jane D.</cite>
+    <blockquote>"Prompt delivery and amazing quality. Highly recommend!"</blockquote>
+    <cite>- John S.</cite>
+</section>
+<hr>
+<section class="list-section">
+    <h2>Spice Lists</h2>
+    <h3>Ordered List</h3>
+    <ol>
+        <li>Turmeric</li>
+        <li>Cinnamon</li>
+        <li>Paprika</li>
+    </ol>
+    <h3>Unordered List</h3>
+    <ul>
+        <li>Cardamom</li>
+        <li>Nutmeg</li>
+        <li>Cloves</li>
+    </ul>
+    <h3>Definition List</h3>
+    <dl>
+        <dt>Turmeric</dt>
+        <dd>A yellow spice often used in curries.</dd>
+        <dt>Cinnamon</dt>
+        <dd>A sweet and aromatic spice.</dd>
+        <dt>Cloves</dt>
+        <dd>A strong spice used in both savory and sweet dishes.</dd>
+    </dl>
+</section>
+
+<hr>
+
+<div class="unformatted">
+Contact us:
+Email: support@spiceworld.com
+Phone: +123-456-7890
+Operating Hours: 9 AM - 5 PM, Mon-Fri
+</div>
+
+<footer>
+    <p>&copy; 2025 SpiceWorld. All rights reserved.</p>
+    <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>
